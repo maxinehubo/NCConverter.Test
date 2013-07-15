@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/netcdfAll-4.3.17.jar"/>
+	<classpathentry kind="lib" path="lib/truezip-samples-7.7.2-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="lib/openmap.jar" sourcepath="/home/sugar/Downloads/openmap-5.0.1.zip"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/openmap"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/truezip-samples-7.7.2-jar-with-dependencies"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/netcdfAll-4.3.17"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

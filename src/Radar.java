@@ -2,7 +2,6 @@ import java.awt.geom.Point2D;
 import java.util.HashMap;
 
 import com.bbn.openmap.proj.coords.LatLonPoint;
-import thredds.catalog2.xml.parser.ThreddsXmlParserIssue;
 
 public class Radar {
 
