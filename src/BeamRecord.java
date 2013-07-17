@@ -1,3 +1,5 @@
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,17 +15,17 @@ public abstract class BeamRecord implements IBeamRecord {
     protected Radar radar;
     protected double elevation;
     protected VCPMode vcp;
-    protected Date startTime;
+    protected Date beamTime;
     protected ArrayList<Double> binValues;
     protected int binIndex = 0;
     protected double gateWidth = 1;
     protected double beamWidth = 1;
 
-    public BeamRecord(Radar radar, VCPMode vcp, double elevation, Date startTime, double gatesWidth, double beamWidth) {
+    public BeamRecord(Radar radar, VCPMode vcp, double elevation, Date beamTime, double gatesWidth, double beamWidth) {
         this.radar = radar;
         this.vcp = vcp;
         this.elevation = elevation;
-        this.startTime = startTime;
+        this.beamTime = beamTime;
         this.binValues = new ArrayList<Double>(460);
         this.gateWidth = gatesWidth;
         this.beamWidth = beamWidth;
@@ -38,7 +40,6 @@ public abstract class BeamRecord implements IBeamRecord {
      */
     @Override
     public int getBinCount() {
-        // TODO Auto-generated method stub
         return binValues.size();
     }
 
@@ -47,7 +48,6 @@ public abstract class BeamRecord implements IBeamRecord {
      */
     @Override
     public double getBinValue(int index) {
-        // TODO Auto-generated method stub
         return binValues.get(index).doubleValue();
     }
 
@@ -56,8 +56,7 @@ public abstract class BeamRecord implements IBeamRecord {
      */
     @Override
     public Date getBeamTime() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.beamTime;
     }
 
     /* (non-Javadoc)
@@ -65,8 +64,7 @@ public abstract class BeamRecord implements IBeamRecord {
      */
     @Override
     public Radar getRadar() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.radar;
     }
 
     /* (non-Javadoc)
@@ -74,8 +72,7 @@ public abstract class BeamRecord implements IBeamRecord {
      */
     @Override
     public VCPMode getVCPMode() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.vcp;
     }
 
     /* (non-Javadoc)
@@ -83,14 +80,12 @@ public abstract class BeamRecord implements IBeamRecord {
      */
     @Override
     public double getNextValue() {
-        // TODO Auto-generated method stub
-        return 0;
+        throw new NotImplementedException();
     }
 
     @Override
     public double getElevation() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.elevation;
     }
 
 }

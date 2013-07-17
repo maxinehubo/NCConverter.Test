@@ -1,5 +1,3 @@
-import sun.org.mozilla.javascript.internal.ast.NewExpression;
-
 import java.util.HashMap;
 
 
