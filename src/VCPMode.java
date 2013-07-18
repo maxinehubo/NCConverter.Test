@@ -26,29 +26,30 @@ public class VCPMode {
     }
 
     public double getAZRate(double subType, Waveform scan) {
-        return scan == Waveform.CS ? AZRate.get(subType) : AZRate2.get(subType);
+        double unit = scan == Waveform.CS ? AZRate.get(subType) : AZRate2.get(subType);
+        return unit * 1000.0;
     }
 
     private void initVCP12() {
         HashMap<Double, Double> m1 = new HashMap<>();
-        m1.put(0.500000, 1 / 17.020000);
-        m1.put(0.900000, 1 / 17.020000);
-        m1.put(1.300000, 1 / 17.020000);
-        m1.put(1.800000, 1 / 14.610000);
-        m1.put(2.400000, 1 / 13.640000);
-        m1.put(3.100000, 1 / 13.640000);
-        m1.put(4.000000, 1 / 13.640000);
-        m1.put(5.100000, 1 / 12.860000);
-        m1.put(6.400000, 1 / 12.860000);
-        m1.put(8.000000, 1 / 12.680000);
-        m1.put(10.000000, 1 / 12.460000);
-        m1.put(12.500000, 1 / 12.530000);
-        m1.put(15.600000, 1 / 12.530000);
-        m1.put(19.500000, 1 / 12.530000);
+        m1.put(0.500000,1/21.150000);
+        m1.put(0.900000,1/21.150000);
+        m1.put(1.300000,1/21.150000);
+        m1.put(1.800000,1/26.640000);
+        m1.put(2.400000,1/26.400000);
+        m1.put(3.100000,1/26.400000);
+        m1.put(4.000000,1/26.400000);
+        m1.put(5.100000,1/28.010000);
+        m1.put(6.400000,1/28.010000);
+        m1.put(8.000000,1/28.400000);
+        m1.put(10.000000,1/28.884000);
+        m1.put(12.500000,1/28.741000);
+        m1.put(15.600000,1/28.741000);
+        m1.put(19.500000,1/28.741000);
         HashMap<Double, Double> m2 = (HashMap<Double, Double>) m1.clone();
-        m2.put(0.500000, 1 / 14.400000);
-        m2.put(0.900000, 1 / 14.400000);
-        m2.put(1.300000, 1 / 14.400000);
+        m2.put(0.500000,1/25.000000);
+        m2.put(0.900000,1/25.000000);
+        m2.put(1.300000,1/25.000000);
         this.AZRate = m1;
         this.AZRate2 = m2;
     }

@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 
 import com.bbn.openmap.proj.coords.LatLonPoint;
 
@@ -15,6 +16,7 @@ public class MainEntry {
 
     public int vcpValue = 0;
 
+    public HashMap<Long, BeamRecord> BeamSet = new HashMap<>();
     /**
      * @param args
      * @throws IOException
@@ -56,6 +58,9 @@ public class MainEntry {
         //Works until to year about 2030, Large enough.
         long startTime = ((Integer) ncfile.findGlobalAttribute("Time").getValue(0)) * 1000l;
 
+        //Get GateWidth to determine legacy or super-resolution (dual-polarize incl.)
+        boolean legacy = (ncfile.findVariable("GateWidth").read().getInt(0) == 1000);
+
         //Get dimension size.
         int sizeAzimuth = ncfile.findDimension("Azimuth").getLength();
         int sizeGate = ncfile.findDimension("Gate").getLength();
@@ -71,6 +76,8 @@ public class MainEntry {
         double[] reflectivity = UtilClass.FloatArrayToDoubleArray((float[]) varReflectivity.read().copyTo1DJavaArray());
         Variable varAzimuth = ncfile.findVariable("Azimuth");
         double[] azimuth = UtilClass.FloatArrayToDoubleArray((float[]) varAzimuth.read().copyTo1DJavaArray());
+        Variable varAzimuthSp = ncfile.findVariable("AzimuthalSpacing");
+        double[] azimuthSp = UtilClass.FloatArrayToDoubleArray((float[]) varAzimuthSp.read().copyTo1DJavaArray());
 
         if (dataType.equals("SparseRadialSet")) {
             SparseRadialSetClass product = new SparseRadialSetClass();
@@ -80,19 +87,30 @@ public class MainEntry {
             product.setSize(sizeAzimuth, sizeGate);
             product.setEncodedValues(reflectivity);
             if (product.decodeSet()) {
-                //Print out everything
-                for (double[] p : product.decodedValues) {
-                    System.out.print("=>");
-                    for (double q : p) {
-                        System.out.print(q + ",");
-                    }
-                    System.out.println();
-                }
-
-                //Generate Beams based on records for each Azimuths
+                //Generate beams based on records for each Azimuths
                 VCPMode VCP = new VCPMode(vcpModeString);
-                VCP.getAZRate(subType, VCPMode.Waveform.CS);
-
+                double unitTime = productName.equals("ReflectivityQC") ? VCP.getAZRate(subType, VCPMode.Waveform.CS) : VCP.getAZRate(subType, VCPMode.Waveform.CD);
+                //Get radar
+                Radar radar = new Radar(radarName);
+                for (int i = 0; i < product.decodedValues.length; i++)
+                {
+                    double[] p = product.decodedValues[i];
+                    long currentTime = startTime + (long)((azimuth[i] - azimuth[0]) * unitTime);
+                    BeamRecord beam;
+                    if(legacy){
+                        beam = new LegacyBeamRecord(radar, VCP, elevation, currentTime);
+                    } else {
+                        beam = new SuperResolutionBeamRecord(radar, VCP, elevation, currentTime);
+                    }
+                    beam.azimuthSpacing = azimuthSp[i];
+                    //Each gate in beam
+                    for (double q: p)
+                    {
+                        beam.addBin(q);
+                    }
+                    this.BeamSet.put(currentTime, beam);
+                }
+                System.out.println(this.BeamSet.size());
             } else {
                 System.out.println("Decode failed on " + input_data);
             }

@@ -17,6 +17,7 @@ public abstract class BeamRecord implements IBeamRecord {
     protected long beamTime;
     protected ArrayList<Double> binValues;
     protected int binIndex = 0;
+    protected double azimuthSpacing;
 
     protected double gateWidth = 1;
     protected double beamWidth = 1;
