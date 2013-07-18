@@ -6,6 +6,9 @@ public class SparseRadialSetClass {
 	protected int sizeX;
 	protected int sizeY;
 	protected int pixels;
+
+    protected double[] dimensionXVariable;
+    protected double[] dimensionYVariable;
 	
 	protected double[] encodedValues;
 	protected double[][] decodedValues;
@@ -31,6 +34,14 @@ public class SparseRadialSetClass {
 	public void setEncodedValues(double[] values) {
 		this.encodedValues = values;
 	}
+
+    public void setDimensionXVariable(double[] dimensionXVariable) {
+        this.dimensionXVariable = dimensionXVariable;
+    }
+
+    public void setDimensionYVariable(double[] dimensionYVariable) {
+
+    }
 	
 	public void setSize(int X, int Y)
 	{

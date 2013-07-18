@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class SuperResolutionBeamRecord extends BeamRecord {
 
-    public SuperResolutionBeamRecord(Radar radar, VCPMode vcp, double elevation, Date startTime) {
+    public SuperResolutionBeamRecord(Radar radar, VCPMode vcp, double elevation, long startTime) {
         //Super-resolution is 250m x 0.5deg
         super(radar, vcp, elevation, startTime, 250, 0.5);
 

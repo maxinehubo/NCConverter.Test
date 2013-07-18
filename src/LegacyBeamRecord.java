@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class LegacyBeamRecord extends BeamRecord {
 
-    public LegacyBeamRecord(Radar radar, VCPMode vcp, double elevation, Date startTime) {
+    public LegacyBeamRecord(Radar radar, VCPMode vcp, double elevation, long startTime) {
         //Legacy resolution is 1000m x 1deg
         super(radar, vcp, elevation, startTime, 1000, 1.0);
     }

@@ -13,15 +13,17 @@ import java.util.Date;
 public abstract class BeamRecord implements IBeamRecord {
 
     protected Radar radar;
-    protected double elevation;
     protected VCPMode vcp;
-    protected Date beamTime;
+    protected long beamTime;
     protected ArrayList<Double> binValues;
     protected int binIndex = 0;
+
     protected double gateWidth = 1;
     protected double beamWidth = 1;
+    protected double elevation;
 
-    public BeamRecord(Radar radar, VCPMode vcp, double elevation, Date beamTime, double gatesWidth, double beamWidth) {
+
+    public BeamRecord(Radar radar, VCPMode vcp, double elevation, long beamTime, double gatesWidth, double beamWidth) {
         this.radar = radar;
         this.vcp = vcp;
         this.elevation = elevation;
@@ -55,7 +57,7 @@ public abstract class BeamRecord implements IBeamRecord {
      * @see IBeamRecord#getBeamTime()
      */
     @Override
-    public Date getBeamTime() {
+    public long getBeamTime() {
         return this.beamTime;
     }
 

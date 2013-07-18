@@ -14,7 +14,7 @@ public interface IBeamRecord {
 	
 	public double getBinValue(int index);
 	
-	public Date getBeamTime();
+	public long getBeamTime();
 	
 	public Radar getRadar();
 	
