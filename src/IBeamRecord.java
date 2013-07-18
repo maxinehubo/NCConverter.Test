@@ -24,4 +24,6 @@ public interface IBeamRecord {
 	
 	public double getNextValue();
 
+    public double getAzimuth();
+
 }

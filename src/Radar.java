@@ -203,6 +203,14 @@ public class Radar implements IRadar {
         return Radars.get(radarName)[4];
     }
 
+    public double getAbsoluteBeamHeightFromRadar(double slantRange, double elevation) {
+        return getRelativeBeamHeightFromRadar(slantRange, elevation) + getRadarHeight();
+    }
+
+    public double getRelativeBeamHeightFromRadar(double slantRange, double elevation) {
+        return NexradEquation.getRelativeBeamHeight(elevation, slantRange);
+    }
+
     /*
     Use static subclasses to describe all radars. Might be more logical. KABR is a sample.
      */

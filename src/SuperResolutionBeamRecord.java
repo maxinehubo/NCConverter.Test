@@ -1,7 +1,3 @@
-import opendap.servlet.www.wwwArray;
-
-import java.util.Date;
-
 /**
  * Created with IntelliJ IDEA.
  * User: sugar
@@ -11,9 +7,9 @@ import java.util.Date;
  */
 public class SuperResolutionBeamRecord extends BeamRecord {
 
-    public SuperResolutionBeamRecord(Radar radar, VCPMode vcp, double elevation, long beamTime) {
+    public SuperResolutionBeamRecord(long beamTime, Radar radar, VCPMode vcp, double elevation, double azimuth) {
         //Super-resolution is 250m x 0.5deg
-        super(radar, vcp, elevation, beamTime, 250, 0.5);
+        super(beamTime, radar, vcp, elevation, azimuth, 250, 0.5);
 
 
     }

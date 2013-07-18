@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.HashMap;
 
 import com.bbn.openmap.proj.coords.LatLonPoint;
@@ -98,9 +97,9 @@ public class MainEntry {
                     long currentTime = startTime + (long)((azimuth[i] - azimuth[0]) * unitTime);
                     BeamRecord beam;
                     if(legacy){
-                        beam = new LegacyBeamRecord(radar, VCP, elevation, currentTime);
+                        beam = new LegacyBeamRecord(currentTime, radar, VCP, elevation, azimuth[i]);
                     } else {
-                        beam = new SuperResolutionBeamRecord(radar, VCP, elevation, currentTime);
+                        beam = new SuperResolutionBeamRecord(currentTime, radar, VCP, elevation, azimuth[i]);
                     }
                     beam.azimuthSpacing = azimuthSp[i];
                     //Each gate in beam

@@ -1,5 +1,3 @@
-import java.util.Date;
-
 /**
  * Created with IntelliJ IDEA.
  * User: sugar
@@ -9,9 +7,9 @@ import java.util.Date;
  */
 public class LegacyBeamRecord extends BeamRecord {
 
-    public LegacyBeamRecord(Radar radar, VCPMode vcp, double elevation, long beamTime) {
+    public LegacyBeamRecord(long beamTime, Radar radar, VCPMode vcp, double azimuth, double elevation) {
         //Legacy resolution is 1000m x 1deg
-        super(radar, vcp, elevation, beamTime, 1000, 1.0);
+        super(beamTime, radar, vcp, elevation, azimuth, 1000, 1.0);
 
     }
 }
